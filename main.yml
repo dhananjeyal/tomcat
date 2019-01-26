@@ -1,0 +1,69 @@
+---
+
+- hosts: tomcat
+
+  tasks:
+
+   - name: make directory
+
+     file: path=/opt/tomcat9 state=directory mode=0755
+
+
+
+   - name: download tomcat
+
+     get_url: url=https://www-us.apache.org/dist/tomcat/tomcat-9/v9.0.14/bin/apache-tomcat-9.0.14.tar.gz dest=/root/
+
+
+
+   - name: extract the tar file
+
+     unarchive: src=/root/apache-tomcat-9.0.14.tar.gz dest=/opt/tomcat9 remote_src=yes
+
+
+
+   - name: create group for tomcat
+
+     group: name=tomcat state=present
+
+
+
+   - name: create user for tomcat
+
+     user: name=tomcat home=/opt/tomcat9 shell=/sbin/nologin groups=tomcat
+
+
+
+   - name: change ownership of the dir
+
+     file: path=/opt/tomcat9 owner=tomcat group=tomcat state=directory recurse=yes
+
+
+
+   - name: install tomcat and java
+
+     package: name={{item}} state=installed
+
+     with_items:
+
+      - tomcat
+
+      - java
+
+
+
+   - name: start the service
+
+     service: name=tomcat state=started enabled=yes
+
+
+
+   - name: shutdown the service
+
+     command: nohup /opt/tomcat9/apache-tomcat-9.0.14/bin/shutdown.sh
+
+
+
+   - name: start tomcat server
+
+     command: nohup /opt/tomcat9/apache-tomcat-9.0.14/bin/startup.sh
