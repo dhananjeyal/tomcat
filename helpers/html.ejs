@@ -1,0 +1,170 @@
+<head>
+    <style>
+        .invoice-box {
+            font-size: 12px;
+            font-family: 'Champagne & Limousines Regular';
+        }
+
+        table.bottomBorder {
+            border-collapse: collapse;
+        }
+
+        table.bottomBorder td,
+        table.bottomBorder th {
+            border-bottom: 1px solid lightgray;
+        }
+    </style>
+
+    <link rel="stylesheet" href="<%= style %>">
+
+</head>
+<img style=" width: 4rem;height:5rem;" src="<%= url %>" alt="" class="logo">
+<br>
+<div class="invoice-box" style="font-family:'Champagne & Limousines Regular';">
+    <div style="padding-top: 5px;font-family:'Champagne & Limousines Regular';">Invoice No: <%= invoiceNo %></div>
+    <div style="padding-top: 5px">
+        <div><%= invoiceaddress %></div>
+    </div>
+    <div style="padding-top: 5px;font-family:'Champagne & Limousines Regular';">Tax No: <%= taxnumber %></div>
+    <div style="display: flex; justify-content: space-between; width: 100%; padding-top: 5px; padding-bottom: 10px;">
+        <div>Email : info@ivarjewelry.com</div>
+        <div style="  float: right;">Website: www.ivarjewelry.com</div>
+    </div>
+    <div style="padding-top: 5px">Date : <%= date %></div>
+    <br>
+    <div style="padding-top: 5px">BillTo : <%= customername%> </div>
+    <div style="padding-top: 5px">Address : <%= customeraddress %></div>
+    <div style="padding-top: 5px">Email : <%= customeremail %></div>
+    <div style="padding-top: 5px">Phone Number : <%= customermobileNumber %></div>
+</div>
+
+<div class="invoice-box" style="width:100%; padding-top:20px;font-family:'Champagne & Limousines Regular';">
+    <table class="bottomBorder" style="width:100%; border:0;">
+        <thead>
+            <tr>
+                <th style="font-size: 12px;font-family:'Champagne & Limousines Regular';">Detail</th>
+                <th style="font-size: 12px;font-family:'Champagne & Limousines Regular';">SerialNo</th>
+                <th
+                    style="font-size: 12px;background-color: rgba(211,211,211,.2); font-family:'Champagne & Limousines Regular';">
+                    Amount</th>
+
+            </tr>
+        </thead>
+
+        <tbody>
+            <% for(var i=0; i < products.length; i++) { %>
+            <tr>
+                <td style="text-align:center;font-size: 12px;font-family:'Champagne & Limousines Regular';">
+                    <%= products[i].productname %></td>
+                <td style="text-align:center;font-family:'Champagne & Limousines Regular';font-size: 12px;">
+                    <%= products[i].serialNo %></td>
+                <td
+                    style="text-align:center;background-color:rgba(211,211,211,.2);font-family:'Champagne & Limousines Regular';font-size: 12px;">
+                    <%= products[i].productprice %></td>
+
+            </tr>
+            <% } %>
+
+            <tr>
+                <td style="border:0px;"></td>
+                <td style="border:0"></td>
+                <td style="border:0"></td>
+            </tr>
+
+            <tr>
+                <td style="border:0">
+                </td>
+                <td
+                    style="text-align:right;padding-right: 10px;font-family:'Champagne & Limousines Regular';font-size: 12px;border:0;">
+                    SUBTOTAL </td>
+                <td style="text-align:left;font-family:'Champagne & Limousines Regular';font-size: 12px;border:0;">
+                    <%= subtotal %>
+                </td>
+
+            </tr>
+
+            <tr style='margin-top:10px'>
+                <td style="border:0px;padding:15px"></td>
+                <td style="border:0"></td>
+                <td style="border:0"></td>
+            </tr>
+
+
+            <tr>
+                <td style="border:0">
+                </td>
+                <% if (!!discount) { %>
+                <td
+                    style="text-align:right;padding-right: 10px;font-family:'Champagne & Limousines Regular';font-size: 12px;border:0;">
+                    DISCOUNT </td>
+                <td style="text-align:left;font-family:'Champagne & Limousines Regular';font-size: 12px;border:0;">
+                    <%= discount %>
+                </td>
+                <% } %>
+
+            </tr>
+
+
+            <tr>
+                <td style="border:0">
+                </td>
+                <% if(discountAmount != 0){ %>
+                <td
+                    style="text-align:right;padding-right: 10px;font-family:'Champagne & Limousines Regular';font-size: 12px;border:0;">
+                    DISCOUNT AMOUNT </td>
+                <td style="text-align:left;font-family:'Champagne & Limousines Regular';font-size: 12px;border:0;">
+                    <%= discountAmount %>
+                </td>
+                <% } %>
+
+            </tr>
+
+            <tr>
+                <td style="border:0">
+                </td>
+                <td style="text-align:right;padding-right:10px;font-family:'Champagne & Limousines Regular';font-size:
+                    12px;border:0;">
+                    TAX</td>
+                <td style="text-align:left;font-family:'Champagne & Limousines Regular';font-size: 12px;border:0;">
+                    <%= tax %>
+                </td>
+
+            </tr>
+
+            <tr>
+                <td style="border:0">
+                </td>
+                <td
+                    style="text-align:right;padding-right: 10px;font-family:'Champagne & Limousines Regular';font-size: 12px;border:0;">
+                    TAX PRICE </td>
+                <td style="text-align:left;font-family:'Champagne & Limousines Regular';font-size: 12px;border:0;">
+                    <%= taxAmount %>
+                </td>
+
+            </tr>
+
+            <tr>
+                <td style="border:0">
+                </td>
+                <td
+                    style="text-align:right;padding-right: 10px; font-family:'Champagne & Limousines Regular';font-size: 12px;border:0;">
+                    TOTAL </td>
+                <td style="text-align:left; font-family:'Champagne & Limousines Regular';font-size: 12px;border:0;">
+                    <%= total %>
+                </td>
+
+            </tr>
+
+        </tbody>
+
+    </table>
+</div>
+<br>
+
+
+<div class="footer" style="position: absolute;bottom:0">
+    <div style="font-family: 'Champagne & Limousines Regular'; font-size: 12px;">
+        <p>If you have any questions concerning this invoice, use the following information info@ivarjewelry.com</p>
+        <p>Hope you enjoy the jewelary as much as we enjoyed creating it...!</p>
+    </div>
+</div>
