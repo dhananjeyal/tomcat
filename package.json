@@ -29,7 +29,7 @@
     "express": "^4.16.2",
     "express-fileupload": "^1.1.5",
     "html-pdf": "^2.1.0",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.21",
     "lodash.lowercase": "^4.3.0",
     "mongoose": "^5.5.11",
     "mongoose-type-email": "^1.0.11",
